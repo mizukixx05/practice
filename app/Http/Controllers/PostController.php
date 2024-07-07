@@ -13,11 +13,11 @@ class PostController extends Controller
     }  //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
     public function show(Post $post)
     {
-        return view('post.show')->with(['post' => $post]);
+        return view('posts.show')->with(['post' => $post]);
     }
     public function create()
     {
-        return veiw('post/create');
+        return view('posts.create');
     }
     public function store(PostRequest $request, Post $post)
     {
@@ -27,7 +27,7 @@ class PostController extends Controller
     }
     public function edit(Post $post)
     {
-        return veiw('posts.edit')->with(['post' => $post]);
+        return view('posts.edit')->with(['post' => $post]);
     }
     public function update(PostRequest $reqest, Post $post)
     {
@@ -35,5 +35,11 @@ class PostController extends Controller
         $post->fill($input_post)->save();
 
          return redirect('/posts/' . $post->id);
+    }
+    
+    public function delete(Post $post)
+    {
+        $post->delete();
+        return redirect('/');
     }
 }
